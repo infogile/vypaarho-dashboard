@@ -4,7 +4,7 @@ import {
   GET_ALL_CATEGORY,
   GET_ALL_INVENTORY,
 } from "./types";
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "https://vyapaarho.herokuapp.com//api";
 // export const getDataByFilter = (data) => (dispatch) => {
 //     axios
 //       .get(`http://192.168.0.106:5000/filter/${data}`)
