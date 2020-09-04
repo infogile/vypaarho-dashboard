@@ -1,43 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Main } from "./layouts";
-import { Product as ProductView } from "./views";
-// import jwt_decode from "jwt-decode";
-// import setAuthToken from "./utils/setAuthToken";
-// import { setCurrentUser, logoutUser } from "./actions/authActions";
-// import { clearCurrentProfile } from "./actions/profileAction";
-
-// import { Provider } from "react-redux";
-// import store from "./store";
-
-// import PrivateRouter from "./components/common/PrivateRoute";
-// import Landing from "./components/layout/landing";
-// import Header from "./components/layout/header";
-// import Register from "./components/auth/Register";
-// import Login from "./components/auth/Login";
-// import EditProfile from "./components/create-profile/EditProfile";
-// import Dashboard from "./components/dashboard/Dashboard";
-// import Profile from "./components/profile/Profile";
-
-// Check for token
-// if (localStorage.jwtToken) {
-//   // Set auth token header auth
-//   setAuthToken(localStorage.jwtToken);
-//   // Decode token and get user info exp
-//   const decoded = jwt_decode(localStorage.jwtToken);
-//   // Set user and isAuthenticated
-//   store.dispatch(setCurrentUser(decoded));
-//   // Check for expired token
-//   const currentTime = Date.now() / 1000;
-//   if (decoded.exp < currentTime) {
-//     // Logout User
-//     store.dispatch(logoutUser());
-//     // Clear Profile
-//     store.dispatch(clearCurrentProfile());
-//     // Redirect to login
-//     window.location.href = "/login";
-//   }
-// }
+import { Product as ProductView, Inventory as InventoryView } from "./views";
+import QRCode from "qrcode.react";
+import { Provider } from "react-redux";
+import store from "./store";
 
 class Header extends React.Component {
   render() {
@@ -59,6 +26,15 @@ class Product extends React.Component {
     return (
       <Main>
         <ProductView />
+      </Main>
+    );
+  }
+}
+class Inventory extends React.Component {
+  render() {
+    return (
+      <Main>
+        <InventoryView />
       </Main>
     );
   }
@@ -91,14 +67,17 @@ class Profile extends React.Component {
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/product" component={Product} />
-          <Route exact path="/listing" component={Listing} />
-          <Route exact path="/orders" component={Order} />
-          {/* <Route exact path="/profile/:handle" component={Profile} /> */}
-          {/* <Switch>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/product" component={Product} />
+            <Route exact path="/listing" component={Listing} />
+            <Route exact path="/orders" component={Order} />
+            <Route exact path="/inventory" component={Inventory} />
+            <Route exact path="/genqr" component={GenQr} />
+            {/* <Route exact path="/profile/:handle" component={Profile} /> */}
+            {/* <Switch>
               <PrivateRouter exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>
@@ -108,8 +87,428 @@ class App extends Component {
                 component={EditProfile}
               />
             </Switch> */}
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </Provider>
+    );
+  }
+}
+
+class GenQr extends React.Component {
+  render() {
+    return (
+      <>
+        <svg
+          width="192"
+          height="192"
+          viewBox="0 0 192 192"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g xmlns="http://www.w3.org/2000/svg" id="svg_8">
+            <rect
+              id="svg_1"
+              height="192"
+              width="192"
+              y="5.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#fff"
+            />
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_3"
+              y="24.4375"
+              x="20"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+            >
+              QWERTYUIOPASDFGHJKLZXCVBNM
+            </text>
+
+            <g>
+              <QRCode
+                stroke="#000"
+                id="svg_6"
+                height="142"
+                width="142"
+                y="37.43749"
+                x="25"
+                stroke-width="0"
+                fill="#fff"
+                value="https://iitsuraj.github.io"
+                renderAs="svg"
+                imageSettings={{
+                  src: "https://iitsuraj.github.io/img/suraj.png",
+                  height: 30,
+                  width: 30,
+                }}
+                size="142"
+              />
+            </g>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_4"
+              y="108.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 15, 100) "
+            >
+              GREEN
+            </text>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_2"
+              y="108.4375"
+              x="171"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 175, 107)"
+            >
+              XXL
+            </text>
+          </g>
+        </svg>
+        <svg
+          width="192"
+          height="192"
+          viewBox="0 0 192 192"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g xmlns="http://www.w3.org/2000/svg" id="svg_8">
+            <rect
+              id="svg_1"
+              height="192"
+              width="192"
+              y="5.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#fff"
+            />
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_3"
+              y="24.4375"
+              x="20"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+            >
+              QWERTYUIOPASDFGHJKLZXCVBNM
+            </text>
+
+            <g>
+              <QRCode
+                stroke="#000"
+                id="svg_6"
+                height="142"
+                width="142"
+                y="37.43749"
+                x="25"
+                stroke-width="0"
+                fill="#fff"
+                value="https://iitsuraj.github.io"
+                renderAs="svg"
+                imageSettings={{
+                  src: "https://iitsuraj.github.io/img/suraj.png",
+                  height: 30,
+                  width: 30,
+                }}
+                size="142"
+              />
+            </g>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_4"
+              y="108.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 15, 100) "
+            >
+              GREEN
+            </text>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_2"
+              y="108.4375"
+              x="171"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 175, 107)"
+            >
+              XXL
+            </text>
+          </g>
+        </svg>
+        <svg
+          width="192"
+          height="192"
+          viewBox="0 0 192 192"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g xmlns="http://www.w3.org/2000/svg" id="svg_8">
+            <rect
+              id="svg_1"
+              height="192"
+              width="192"
+              y="5.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#fff"
+            />
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_3"
+              y="24.4375"
+              x="20"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+            >
+              QWERTYUIOPASDFGHJKLZXCVBNM
+            </text>
+
+            <g>
+              <QRCode
+                stroke="#000"
+                id="svg_6"
+                height="142"
+                width="142"
+                y="37.43749"
+                x="25"
+                stroke-width="0"
+                fill="#fff"
+                value="https://iitsuraj.github.io"
+                renderAs="svg"
+                imageSettings={{
+                  src: "https://iitsuraj.github.io/img/suraj.png",
+                  height: 30,
+                  width: 30,
+                }}
+                size="142"
+              />
+            </g>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_4"
+              y="108.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 15, 100) "
+            >
+              GREEN
+            </text>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_2"
+              y="108.4375"
+              x="171"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 175, 107)"
+            >
+              XXL
+            </text>
+          </g>
+        </svg>
+        <svg
+          width="192"
+          height="192"
+          viewBox="0 0 192 192"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g xmlns="http://www.w3.org/2000/svg" id="svg_8">
+            <rect
+              id="svg_1"
+              height="192"
+              width="192"
+              y="5.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#fff"
+            />
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_3"
+              y="24.4375"
+              x="20"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+            >
+              QWERTYUIOPASDFGHJKLZXCVBNM
+            </text>
+
+            <g>
+              <QRCode
+                stroke="#000"
+                id="svg_6"
+                height="142"
+                width="142"
+                y="37.43749"
+                x="25"
+                stroke-width="0"
+                fill="#fff"
+                value="https://iitsuraj.github.io"
+                renderAs="svg"
+                imageSettings={{
+                  src: "https://iitsuraj.github.io/img/suraj.png",
+                  height: 30,
+                  width: 30,
+                }}
+                size="142"
+              />
+            </g>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_4"
+              y="108.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 15, 100) "
+            >
+              GREEN
+            </text>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_2"
+              y="108.4375"
+              x="171"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 175, 107)"
+            >
+              XXL
+            </text>
+          </g>
+        </svg>
+        <svg
+          width="192"
+          height="192"
+          viewBox="0 0 192 192"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g xmlns="http://www.w3.org/2000/svg" id="svg_8">
+            <rect
+              id="svg_1"
+              height="192"
+              width="192"
+              y="5.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#fff"
+            />
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_3"
+              y="24.4375"
+              x="20"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+            >
+              QWERTYUIOPASDFGHJKLZXCVBNM
+            </text>
+
+            <g>
+              <QRCode
+                stroke="#000"
+                id="svg_6"
+                height="142"
+                width="142"
+                y="37.43749"
+                x="25"
+                stroke-width="0"
+                fill="#fff"
+                value="https://iitsuraj.github.io"
+                renderAs="svg"
+                imageSettings={{
+                  src: "https://iitsuraj.github.io/img/suraj.png",
+                  height: 30,
+                  width: 30,
+                }}
+                size="142"
+              />
+            </g>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_4"
+              y="108.4375"
+              x="0"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 15, 100) "
+            >
+              GREEN
+            </text>
+            <text
+              text-anchor="start"
+              font-family="Helvetica, Arial, sans-serif"
+              font-size="10"
+              id="svg_2"
+              y="108.4375"
+              x="171"
+              stroke-width="0"
+              stroke="#000"
+              fill="#000000"
+              transform="rotate(90, 175, 107)"
+            >
+              XXL
+            </text>
+          </g>
+        </svg>
+      </>
     );
   }
 }

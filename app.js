@@ -12,10 +12,6 @@ if (true) {
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "build", "index.html"));
   });
-} else {
-  app.get("*", (req, res) => {
-    res.send("Running....");
-  });
 }
 
 const port = process.env.PORT || "8080";

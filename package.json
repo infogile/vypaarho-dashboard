@@ -6,15 +6,22 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "apollo-boost": "^0.4.9",
+    "axios": "^0.20.0",
     "express": "^4.17.1",
-    "graphql": "^15.3.0",
-    "graphql-tag": "^2.11.0",
+    "memoize-one": "^5.1.1",
+    "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
-    "react-apollo": "^3.1.5",
+    "react-data-table-component": "^6.11.2",
+    "react-datasheet": "^1.4.8",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-select": "^3.1.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "validator": "^13.1.1"
   },
   "engines": {
     "node": "12.18.3",
@@ -25,7 +32,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "react-scripts build"
+    "postinstall": "react-scripts build",
+    "dev": "nw build/",
+    "prod": "nwbuild --platforms win32,win64,osx64,linux32,linux64 --buildDir dist/ build/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +50,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nw": "0.44.1-sdk",
+    "nw-builder": "3.5.7"
   }
 }
